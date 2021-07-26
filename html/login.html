@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <script src="js/frontEndFunctionality.js"></script>
+    <style>
+        .container {
+        display: grid;
+        grid-template-columns: 0.4fr 1.5fr 1.6fr 1.4fr 0.4fr;
+        grid-template-rows: 2.5fr 1.3fr 1fr;
+        gap: 0px 0px;
+        grid-auto-flow: row;
+        grid-template-areas:
+        ". . . . ."
+        ". . Login . ."
+        ". . . . .";
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+        width: 10em
+    }
+
+    body {
+            background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F21%2F79%2Fb9%2F2179b92dbcc4d44889b9b23733b8f2b2.jpg&f=1&nofb=1");
+        }
+
+    h1 {
+        color: yellow;
+        text-align: center;
+        margin-top: 3em;
+    }
+
+    .Login { grid-area: Login; }
+
+    </style>
+</head>
+<body>
+    <h1>Hyperion New U Requests</h1>
+    <div class="container">
+        <div class="Login">
+        <input type="text" placeholder="Username" id="userName"><br /><br />
+        <input type="text", placeholder="Password" id = "passWord"><br /><br />
+        <button onclick="login()" id = "login">Login</button><br />
+        </div>
+      </div>
+
+    
+</body>
+
+</html>

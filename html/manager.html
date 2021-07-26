@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manager</title>
+    <script src="js/frontEndFunctionality.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="undefined" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2/dist/chart.min.js"></script>
+    <style>
+      .container {
+  display: grid;
+  grid-template-columns: 0.4fr 2.2fr 0.1fr 2.2fr 0.4fr;
+  grid-template-rows: 0.2fr 1.8fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    ". . . . ."
+    ". reimbursementChart . rejectedChart ."
+    ". . . . .";
+}
+
+#theRest {
+  align-content: center;
+  text-align: center;
+  padding-top: 1em;
+}
+
+#tableButton {
+  margin-bottom: 1em;
+}
+
+body {
+  background-color: #212529;
+  
+}
+
+.reimbursementChart { grid-area: reimbursementChart; }
+
+.rejectedChart { grid-area: rejectedChart; }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a style="color: yellow;" class="nav-link" href="#">Hyperion New U</a>
+            </li>
+            <li class="nav-item">
+                <!-- The get All Reimbursements function should be in a separate js file since it will be used by managers as well -->
+              <a onclick="getAllReimbursements()" class="nav-link" href="#" id="view">View </a>
+            </li>
+            <li class="nav-item">
+              <a onclick="stats()" class="nav-link" href="#" id="stats">Stats</a>
+            </li>
+            <li class="nav-item">
+              <a onclick="logout()" class="nav-link" href="#" id="logout">Log out</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+    <div id="theRest">
+    </div>
+</body>
+<script>
+    checkLogin();
+</script>
+</html>

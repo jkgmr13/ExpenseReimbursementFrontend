@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="undefined" crossorigin="anonymous">
+    <script src="js/frontEndFunctionality.js"></script>
+    <meta charset="UTF-8">
+    <title>Employee</title>
+
+    <style>
+      
+      body {
+        background-color: #212529;
+      }
+
+      #myFile {
+        color: white;
+        text-align: center;
+      }
+
+      #theRest {
+          align-content: center;
+          text-align: center;
+          padding-top: 1em;
+      }
+
+      #amount {
+        margin-right: 1em;
+      }
+
+      #reason {
+        margin-right: 1em;
+      }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a style="color: yellow;" class="nav-link" href="#">Hyperion New U</a>
+            </li>
+            <li class="nav-item">
+                <!-- The get All Reimbursements function should be in a separate js file since it will be used by managers as well -->
+              <a onclick="getAllReimbursements()" class="nav-link" href="#" id="view">View </a>
+            </li>
+            <li class="nav-item">
+              <a onclick="updateEmployeePage()" class="nav-link" href="#" id="create">Create</a>
+            </li>
+            <li class="nav-item">
+              <a onclick="logout()" class="nav-link" href="#" id="logout">Log out</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+    <div id="theRest">
+
+    </div>
+</body>
+<script>
+    checkLogin()
+</script>
+</html>
