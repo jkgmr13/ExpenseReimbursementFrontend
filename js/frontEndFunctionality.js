@@ -103,7 +103,7 @@
 
     async function getReimbursement(reId){
         const response = await fetch(path+`/reimbursements/${reId}`)
-        return await response.json();
+        return response.json();
     }
 
     async function approve(reId){
