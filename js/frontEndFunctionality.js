@@ -1,12 +1,11 @@
+    const path = "http://localhost:5000"; // path to backend server goes here.
+    const filePath = "http://localhost:5500";
 
- // I need a login() method that accesses the database and verifies login information.
-    // This means I need a backend method I would guess "get" that gets a user with those specific parameters and redirects
     async function login(){
         const userName = document.getElementById("userName").value;
         const passWord = document.getElementById("passWord").value;
         
-        //This should pass the username and password to the backend for verification.
-        const response = await fetch(`http://localhost:5000/login`, {method: 'POST',
+        const response = await fetch(path + "/login", {method: 'POST',
         body: JSON.stringify({"userName": userName, "passWord": passWord}),
         mode: 'cors',
          credentials: 'same-origin',
@@ -23,33 +22,33 @@
         window.localStorage.setItem('roleId', user['roleId']);
         if(user["roleId"]==0){
             //They are an employee, so redirect them to the employee page
-            window.location.replace("file:///C:\\Users\\jkgmr13\\PycharmProjects\\Project1FrontEnd\\employee.html");
+            window.location.replace("\\employee.html");
         }
         if(user["roleId"]==1){
             //They are a manager, so redirect them to the manager page.
-            window.location.replace("file:///C:\\Users\\jkgmr13\\PycharmProjects\\Project1FrontEnd\\manager.html");
+            window.location.replace(filePath + "\\manager.html");
         }
     }
 
     function checkLogin(){
         if(window.localStorage.getItem('roleId') == undefined){
-            window.location.replace("file:///C:\\Users\\jkgmr13\\PycharmProjects\\Project1FrontEnd\\login.html")
+            window.location.replace(filePath+"\\login.html");
         }
         if(document.title === "Employee" && window.localStorage.getItem('roleId')== 1){
-            window.location.replace("file:///C:\\Users\\jkgmr13\\PycharmProjects\\Project1FrontEnd\\manager.html")
+            window.location.replace(filePath+"\\manager.html");
         }
         if(document.title === "Manager" && window.localStorage.getItem('roleId')== 0){
-            window.location.replace("file:///C:\\Users\\jkgmr13\\PycharmProjects\\Project1FrontEnd\\employee.html")
+            window.location.replace(filePath+"\\employee.html")
         }
     }
 
     async function getAllReimbursements(){
         let response;
         if(window.localStorage.getItem('roleId') == 0){
-            response = await fetch(`http://localhost:5000/employees/${window.localStorage.getItem('employeeId')}/reimbursements`);
+            response = await fetch(path+`/employees/${window.localStorage.getItem('employeeId')}/reimbursements`);
         }
         else{
-            response = await fetch(`http://localhost:5000/reimbursements`)
+            response = await fetch(path+`/reimbursements`)
         }
         const body = await response.json();
         const theRest = document.getElementById('theRest')
@@ -76,7 +75,7 @@
     async function updateTable(){
         const tableBody = document.getElementById('reimbursementTable');
         const switchButton = document.getElementById('tableButton');
-        const response = await fetch(`http://localhost:5000/reimbursements`);
+        const response = await fetch(path+`/reimbursements`);
         const body = await response.json();
         if(switchButton.name === 'pending'){
             switchButton.name = 'past';
@@ -103,7 +102,7 @@
     }
 
     async function getReimbursement(reId){
-        const response = await fetch(`http://localhost:5000/reimbursements/${reId}`)
+        const response = await fetch(path+`/reimbursements/${reId}`)
         const body = response.json();
         return body;
     }
@@ -123,7 +122,7 @@
              'Content-Type': 'application/json'
             }
         };
-        response = await fetch(`http://localhost:5000/reimbursements/${reId}`, config)
+        response = await fetch(path+`/reimbursements/${reId}`, config)
         if(response.status == 200){
             console.log("approved Successfully");
             getAllReimbursements();
@@ -145,7 +144,7 @@
              'Content-Type': 'application/json'
             }
         };
-        response = await fetch(`http://localhost:5000/reimbursements/${reId}`, config)
+        response = await fetch(path+`/reimbursements/${reId}`, config)
         if(response.status == 200){
             console.log('Rejected Successfully');
             getAllReimbursements();
@@ -161,7 +160,6 @@
         let amount = document.getElementById('amount');
         let reason = document.getElementById('reason');
         let file = document.getElementById('myFile')
-        console.log(file);
         if(amount.value === "" && file.value === "" ){
             alert("amount is a required field");
         }
@@ -185,7 +183,8 @@
                 'Content-Type': 'application/json'
             }
             };
-            const response = await fetch(`http://localhost:5000/reimbursements`, config);
+            const response = await fetch(path+`/reimbursements`, config);
+            console.log(response);
             if(response.status == 201){
                 console.log("Created Successfully")
                 updateEmployeePage();
@@ -214,7 +213,7 @@
                         'Content-Type': 'application/json'
                     }
                 };
-                const response = await fetch('http://localhost:5000/reimbursements', config)
+                const response = await fetch(path+'/reimbursements', config)
                 if(response.status == 201){
                     console.log("Created Successfully")
                     updateEmployeePage();
@@ -229,7 +228,7 @@
     function logout(){
         window.localStorage.removeItem('employeeId');
         window.localStorage.removeItem('roleId');
-        window.location.href = "file:///C:\\Users\\jkgmr13\\PycharmProjects\\Project1FrontEnd\\login.html"
+        window.location.href = filePath+"\\login.html"
     }
 
     async function stats(){
@@ -239,7 +238,7 @@
     }
 
     async function generateChart(){
-        const response = await fetch('http://localhost:5000/employees');
+        const response = await fetch(path+'/employees');
         const body = await response.json();
         const employeeIds = new Array();
         const employeeNames = new Array();
@@ -247,7 +246,7 @@
             employeeIds.push(body[n]['employeeId']);
             employeeNames.push(body[n]['firstName']);
         }
-        const response1 = await fetch('http://localhost:5000/reimbursements');
+        const response1 = await fetch(path+'/reimbursements');
         const body1 = await response1.json();
         let employeeAmounts = [];
         let employeeRejected = [];
