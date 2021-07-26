@@ -16,7 +16,7 @@
         if(response.status == 404){
             alert("invalid login credentials")
         }
-        user = await response.json();
+        const user = await response.json();
         //Store login information in local storage for checking login credentials on later pagers.
         window.localStorage.setItem('employeeId', user['employeeId']);
         window.localStorage.setItem('roleId', user['roleId']);
@@ -54,7 +54,7 @@
         const theRest = document.getElementById('theRest')
         if(window.localStorage.getItem('roleId')==0){
             let tableBody = '<table class=\"table table-sm table-dark\"><tbody id=\'reimbursementTable\'><tr><th>Amount</th><th>Status</th><th>Reason</th></tr>'
-            for(record in body){
+            for(let record in body){
                 tableBody += `<tr><td>${body[record]['amount']}</td><td>${body[record]['status']}</td><td>${body[record]['reason']}</td></tr>`
             }
             tableBody += '</tbody></table>'
@@ -81,7 +81,7 @@
             switchButton.name = 'past';
             switchButton.innerHTML = 'Pending';
             tableBody.innerHTML = '<tr><th>Amount</th><th>Reason</th><th>Status</th></tr>';
-            for(n in body){
+            for(let n in body){
                 if(body[n]['status'].toLowerCase() != 'pending'){
                     tableBody.innerHTML += `<tr><td>${body[n]['amount']}</td><td>${body[n]['reason']}</td><td>${body[n]['status']}</tr>`;
                 }
@@ -103,8 +103,7 @@
 
     async function getReimbursement(reId){
         const response = await fetch(path+`/reimbursements/${reId}`)
-        const body = response.json();
-        return body;
+        return await response.json();
     }
 
     async function approve(reId){
@@ -122,7 +121,7 @@
              'Content-Type': 'application/json'
             }
         };
-        response = await fetch(path+`/reimbursements/${reId}`, config)
+        const response = await fetch(path+`/reimbursements/${reId}`, config)
         if(response.status == 200){
             console.log("approved Successfully");
             getAllReimbursements();
@@ -189,7 +188,7 @@
                 console.log("Created Successfully")
                 updateEmployeePage();
             }
-            else if(amount !== "" && reason !== ""){
+            else if(amount != "" && reason != ""){
                 alert('Uh oh, something went wrong');
             }
         }
